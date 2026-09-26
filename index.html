@@ -1,0 +1,240 @@
+1<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusicHub - Music Downloads</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #101010;
+      color: white;
+    }
+
+    header {
+      background: #181818;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    header h1 {
+      font-size: 32px;
+    }
+
+    header p {
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    .search {
+      width: 90%;
+      max-width: 600px;
+      margin: 25px auto;
+      display: block;
+      padding: 14px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .music-card {
+      background: #1c1c1c;
+      margin: 15px 0;
+      padding: 18px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .song-info h2 {
+      font-size: 19px;
+    }
+
+    .song-info p {
+      color: #999;
+      margin-top: 5px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    button,
+    .download {
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      background: #6c5ce7;
+    }
+
+    button:hover,
+    .download:hover {
+      background: #8b7cf6;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      padding: 30px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .music-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .buttons {
+        width: 100%;
+      }
+
+      button,
+      .download {
+        flex: 1;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎵 MusicHub</h1>
+    <p>Listen & download music you have permission to distribute</p>
+  </header>
+
+  <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="Search songs..."
+    onkeyup="searchSongs()"
+  >
+
+  <div class="container" id="songList">
+
+    <div class="music-card">
+      <div class="song-info">
+        <h2>Summer Vibes</h2>
+        <p>Artist: Demo Artist</p>
+      </div>
+
+      <div class="buttons">
+        <button onclick="playSong('music/song1.mp3')">
+          ▶ Play
+        </button>
+
+        <a class="download"
+           href="music/song1.mp3"
+           download>
+          ⬇ Download
+        </a>
+      </div>
+    </div>
+
+
+    <div class="music-card">
+      <div class="song-info">
+        <h2>Night Drive</h2>
+        <p>Artist: Demo Artist</p>
+      </div>
+
+      <div class="buttons">
+        <button onclick="playSong('music/song2.mp3')">
+          ▶ Play
+        </button>
+
+        <a class="download"
+           href="music/song2.mp3"
+           download>
+          ⬇ Download
+        </a>
+      </div>
+    </div>
+
+
+    <div class="music-card">
+      <div class="song-info">
+        <h2>Dream World</h2>
+        <p>Artist: Demo Artist</p>
+      </div>
+
+      <div class="buttons">
+        <button onclick="playSong('music/song3.mp3')">
+          ▶ Play
+        </button>
+
+        <a class="download"
+           href="music/song3.mp3"
+           download>
+          ⬇ Download
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <audio id="player" controls style="
+    display:block;
+    width:90%;
+    max-width:600px;
+    margin:25px auto;
+  "></audio>
+
+  <footer>
+    © 2026 MusicHub | Only authorized music
+  </footer>
+
+
+  <script>
+    function playSong(song) {
+      const player = document.getElementById("player");
+      player.src = song;
+      player.play();
+    }
+
+    function searchSongs() {
+      const search = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+      const cards = document.querySelectorAll(".music-card");
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
+
+</body>
+        </html>
